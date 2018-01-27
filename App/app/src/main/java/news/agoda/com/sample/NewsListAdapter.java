@@ -15,7 +15,12 @@ import com.facebook.imagepipeline.request.ImageRequest;
 
 import java.util.List;
 
+import news.agoda.com.sample.model.MediaEntity;
+import news.agoda.com.sample.model.NewsEntity;
+
 public class NewsListAdapter extends ArrayAdapter {
+
+
     private static class ViewHolder {
         TextView newsTitle;
         DraweeView imageView;

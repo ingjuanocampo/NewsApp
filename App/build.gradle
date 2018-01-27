@@ -7,8 +7,17 @@ buildscript {
     }
 }
 
+ext {
+    buildToolsVersion = "26.0.2"
+    compileSdkVersion = 26
+    supportLibraryVersion = "26.1.0"
+}
+
 allprojects {
     repositories {
         jcenter()
+        maven {
+            url "https://maven.google.com"
+        }
     }
 }

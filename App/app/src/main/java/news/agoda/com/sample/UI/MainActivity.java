@@ -1,4 +1,4 @@
-package news.agoda.com.sample;
+package news.agoda.com.sample.UI;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -26,6 +26,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
+import news.agoda.com.sample.Callback;
+import news.agoda.com.sample.DetailViewActivity;
+import news.agoda.com.sample.NewsListAdapter;
+import news.agoda.com.sample.R;
+import news.agoda.com.sample.model.NewsEntity;
 
 public class MainActivity
         extends ListActivity
