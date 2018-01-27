@@ -1,5 +1,6 @@
 package news.agoda.com.sample.network;
 
+import news.agoda.com.sample.model.FrescoResponse;
 import news.agoda.com.sample.model.NewsEntity;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -11,6 +12,6 @@ import retrofit2.http.GET;
 public interface FrescoApi {
 
     @GET("bins/nl6jh")
-    Call<NewsEntity> getNews();
+    Call<FrescoResponse> getNews();
 
 }

@@ -18,6 +18,7 @@ import java.util.List;
 import news.agoda.com.sample.model.MediaEntity;
 import news.agoda.com.sample.model.NewsEntity;
 
+@Deprecated
 public class NewsListAdapter extends ArrayAdapter {
 
 
@@ -32,8 +33,8 @@ public class NewsListAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        NewsEntity newsEntity = (NewsEntity) getItem(position);
-        List<MediaEntity> mediaEntityList = newsEntity.getMediaEntity();
+        /*NewsEntity newsEntity = (NewsEntity) getItem(position);
+        List<MediaEntity> mediaEntityList = newsEntity.getMultimedia();
         String thumbnailURL = "";
         MediaEntity mediaEntity = mediaEntityList.get(0);
         thumbnailURL = mediaEntity.getUrl();
@@ -52,7 +53,7 @@ public class NewsListAdapter extends ArrayAdapter {
         viewHolder.newsTitle.setText(newsEntity.getTitle());
         DraweeController draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri
                 (Uri.parse(thumbnailURL))).setOldController(viewHolder.imageView.getController()).build();
-        viewHolder.imageView.setController(draweeController);
+        viewHolder.imageView.setController(draweeController);*/
         return convertView;
     }
 }

@@ -1,6 +1,6 @@
 package news.agoda.com.sample.mvp;
 
-import news.agoda.com.sample.model.NewsEntity;
+import news.agoda.com.sample.model.FrescoResponse;
 import news.agoda.com.sample.network.FrescoRetrofitApi;
 import rx.Observable;
 import rx.Observer;
@@ -26,19 +26,21 @@ public class NewsPresenter implements BaseViewBinder {
 
     @Override
     public void bind() {
-        subscription = Observable.create(new Observable.OnSubscribe<NewsEntity>() {
+        subscription = Observable.create(new Observable.OnSubscribe<FrescoResponse>() {
+
             @Override
-            public void call(Subscriber<? super NewsEntity> subscriber) {
+            public void call(Subscriber<? super FrescoResponse> subscriber) {
                 frescoRetrofitApi.getNewsFromService(subscriber);
 
             }
+
         }).subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getSubscribe());
     }
 
-    private Observer<? super NewsEntity> getSubscribe() {
-        return new Subscriber<NewsEntity>() {
+    private Observer<? super FrescoResponse> getSubscribe() {
+        return new Subscriber<FrescoResponse>() {
             @Override
             public void onCompleted() {
 
@@ -50,8 +52,8 @@ public class NewsPresenter implements BaseViewBinder {
             }
 
             @Override
-            public void onNext(NewsEntity newsEntity) {
-                newsView.setNews(newsEntity);
+            public void onNext(FrescoResponse newsEntity) {
+                newsView.setNews(newsEntity.getNewsEntities());
             }
         };
     }

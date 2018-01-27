@@ -33,11 +33,12 @@ import news.agoda.com.sample.NewsListAdapter;
 import news.agoda.com.sample.R;
 import news.agoda.com.sample.model.NewsEntity;
 
-public class MainActivity
-        extends ListActivity
-        implements Callback {
+@Deprecated
+public class MainActivity {
+        //extends ListActivity
+        //implements Callback {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    /*private static final String TAG = MainActivity.class.getSimpleName();
     private List<NewsEntity> newsItemList;
     private Handler handler = new Handler(Looper.getMainLooper());
 
@@ -137,6 +138,6 @@ public class MainActivity
                 });
             }
         }, 0);
-    }
+    }*/
 
 }

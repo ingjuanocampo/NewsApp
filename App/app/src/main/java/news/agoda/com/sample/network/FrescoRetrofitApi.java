@@ -1,8 +1,14 @@
 package news.agoda.com.sample.network;
 
-import java.io.IOException;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import news.agoda.com.sample.model.NewsEntity;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
+
+import news.agoda.com.sample.model.FrescoResponse;
+import news.agoda.com.sample.model.MediaEntity;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -14,14 +20,14 @@ import rx.Subscriber;
 
 public class FrescoRetrofitApi {
 
-    private static FrescoRetrofitApi insntace;
+    private static FrescoRetrofitApi instance;
     private final FrescoApi frescoApi;
 
     public static FrescoRetrofitApi getInstance() {
-        if (insntace == null) {
-            insntace = new FrescoRetrofitApi();
+        if (instance == null) {
+            instance = new FrescoRetrofitApi();
         }
-        return insntace;
+        return instance;
     }
 
     public FrescoRetrofitApi() {
@@ -32,21 +38,16 @@ public class FrescoRetrofitApi {
         frescoApi = retrofit.create(FrescoApi.class);
     }
 
-    public FrescoApi getApi() {
-        return frescoApi;
-    }
-
-
     public String getBaseUrl() {
         return "https://api.myjson.com";
     }
 
-    public void getNewsFromService(Subscriber<? super NewsEntity> subscriber) {
+    public void getNewsFromService(Subscriber<? super FrescoResponse> subscriber) {
         try {
-            Response<NewsEntity> response = frescoApi.getNews().execute();
-            if (response.isSuccessful()) {
+            Response<FrescoResponse> response = frescoApi.getNews().execute();
+            if (response.isSuccessful() && response.body() != null) {
                 subscriber.onNext(response.body());
-            } else  {
+            } else {
                 subscriber.onError(new Exception("There was a problem with the request"));
             }
 
@@ -54,5 +55,20 @@ public class FrescoRetrofitApi {
             e.printStackTrace();
             subscriber.onError(e);
         }
+    }
+
+
+    public static List<MediaEntity> gsonToMediaEntry(Object object) {
+        Gson gson = new Gson();
+        final Type tokenMediaEntry = new TypeToken<List<MediaEntity>>() {
+        }.getType();
+
+
+        return gson.fromJson(object2StringGson(object), tokenMediaEntry);
+    }
+
+    public static String object2StringGson(Object object) {
+        Gson gson = new Gson();
+        return gson.toJson(object);
     }
 }

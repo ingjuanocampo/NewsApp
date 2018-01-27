@@ -1,5 +1,7 @@
 package news.agoda.com.sample.mvp;
 
+import java.util.List;
+
 import news.agoda.com.sample.model.NewsEntity;
 
 /**
@@ -7,6 +9,6 @@ import news.agoda.com.sample.model.NewsEntity;
  */
 
 public interface NewsView {
-    void setNews(NewsEntity newsEntity);
+    void setNews(List<NewsEntity> newsEntity);
     void setError();
 }
