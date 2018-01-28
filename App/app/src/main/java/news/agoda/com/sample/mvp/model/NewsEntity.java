@@ -1,13 +1,20 @@
 package news.agoda.com.sample.mvp.model;
 
+import android.text.TextUtils;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+import java.util.List;
+
+import news.agoda.com.sample.network.FrescoRetrofitApi;
 
 /**
  * This represents a news item
  */
 
-public class NewsEntity {
+public class NewsEntity implements Serializable {
 
     @SerializedName("section")
     @Expose
@@ -87,6 +94,20 @@ public class NewsEntity {
 
     public String getUrl() {
         return url;
+    }
+
+    public String getImageUrl() {
+        if (multimedia != null) {
+            String strMultimedia = multimedia.toString();
+            if (!TextUtils.isEmpty(strMultimedia)) {
+                List<MediaEntity> mediaEntityList = FrescoRetrofitApi.gsonToMediaEntry(multimedia);
+                if (mediaEntityList != null && !mediaEntityList.isEmpty()) {
+                    return mediaEntityList.get(0).getUrl();
+
+                }
+            }
+        }
+        return "";
     }
 
     public void setUrl(String url) {

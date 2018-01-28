@@ -18,6 +18,7 @@ public class NewsPresenter implements BaseViewBinder {
     private final NewsView newsView;
     private Subscription subscription;
     private FrescoRetrofitApi frescoRetrofitApi = FrescoRetrofitApi.getInstance();
+    private FrescoResponse frescoResponse;
 
     public NewsPresenter(NewsView newsView) {
         this.newsView = newsView;
@@ -26,17 +27,19 @@ public class NewsPresenter implements BaseViewBinder {
 
     @Override
     public void bind() {
-        subscription = Observable.create(new Observable.OnSubscribe<FrescoResponse>() {
+        if (frescoResponse == null) {
+            subscription = Observable.create(new Observable.OnSubscribe<FrescoResponse>() {
 
-            @Override
-            public void call(Subscriber<? super FrescoResponse> subscriber) {
-                frescoRetrofitApi.getNewsFromService(subscriber);
+                @Override
+                public void call(Subscriber<? super FrescoResponse> subscriber) {
+                    frescoRetrofitApi.getNewsFromService(subscriber);
 
-            }
+                }
 
-        }).subscribeOn(Schedulers.newThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getSubscribe());
+            }).subscribeOn(Schedulers.newThread())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(getSubscribe());
+        }
     }
 
     private Observer<? super FrescoResponse> getSubscribe() {
@@ -52,8 +55,9 @@ public class NewsPresenter implements BaseViewBinder {
             }
 
             @Override
-            public void onNext(FrescoResponse newsEntity) {
-                newsView.setNews(newsEntity.getNewsEntities());
+            public void onNext(FrescoResponse frescoResponse) {
+                NewsPresenter.this.frescoResponse = frescoResponse;
+                newsView.setNews(frescoResponse.getNewsEntities());
             }
         };
     }

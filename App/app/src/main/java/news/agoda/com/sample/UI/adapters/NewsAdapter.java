@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -26,8 +27,17 @@ import news.agoda.com.sample.network.FrescoRetrofitApi;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
+    public interface NewsCardListener {
+        void onNewsClicked(NewsEntity entity);
+    }
+
     private List<NewsEntity> newsEntities = new ArrayList<>();
 
+    public NewsAdapter(NewsCardListener listener) {
+        this.listener = listener;
+    }
+
+    public final NewsCardListener listener;
 
     @Override
     public NewsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,33 +63,28 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         private final TextView newsTitle;
         private final DraweeView imageView;
+        private NewsEntity entity;
 
         public ViewHolder(ViewGroup parent) {
             super(LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_news, parent, false));
             newsTitle = itemView.findViewById(R.id.news_title);
             imageView = itemView.findViewById(R.id.news_item_image);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onNewsClicked(entity);
+                }
+            });
         }
 
         public void bind(NewsEntity entity) {
+            this.entity = entity;
             newsTitle.setText(entity.getTitle());
-            String url = getUrl(entity.getMultimedia());
+            String url = entity.getImageUrl();
             DraweeController draweeController = Fresco.newDraweeControllerBuilder().setImageRequest(ImageRequest.fromUri
                     (Uri.parse(url))).setOldController(imageView.getController()).build();
             imageView.setController(draweeController);
-        }
-
-        private String getUrl(Object multimedia) {
-            if (multimedia != null) {
-                String strMultimedia = multimedia.toString();
-                if (!TextUtils.isEmpty(strMultimedia)) {
-                    List<MediaEntity> mediaEntityList = FrescoRetrofitApi.gsonToMediaEntry(multimedia);
-                    if (mediaEntityList != null && !mediaEntityList.isEmpty()) {
-                        return mediaEntityList.get(0).getUrl();
-
-                    }
-                }
-            }
-            return "";
         }
     }
 
