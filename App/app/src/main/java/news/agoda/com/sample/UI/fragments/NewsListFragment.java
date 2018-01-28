@@ -28,6 +28,7 @@ public class NewsListFragment extends Fragment implements NewsView  {
     private NewsAdapter adapter;
     private View loader;
     private RecyclerView recyclerView;
+    private boolean isTablet;
 
     @Override
     public void onAttach(Context context) {
@@ -69,10 +70,14 @@ public class NewsListFragment extends Fragment implements NewsView  {
     }
 
     @Override
-    public void setNews(List<NewsEntity> newsEntity) {
+    public void setNews(List<NewsEntity> newsEntities) {
         loader.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
-        adapter.setNewsEntities(newsEntity);
+        adapter.setNewsEntities(newsEntities);
+        isTablet = getResources().getBoolean(R.bool.isTable);
+        if (isTablet) {
+            ((NewsAdapter.NewsCardListener) getActivity()).onNewsClicked(newsEntities.get(0)); // By default 0 is selected
+        }
     }
 
     @Override

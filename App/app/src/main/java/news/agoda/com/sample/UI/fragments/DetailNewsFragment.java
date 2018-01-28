@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class DetailNewsFragment extends Fragment {
     private TextView titleView;
     private DraweeView imageView;
     private TextView summaryView;
+    private View loader;
 
     @Nullable
     @Override
@@ -43,10 +45,19 @@ public class DetailNewsFragment extends Fragment {
         titleView = view.findViewById(R.id.title);
         imageView = view.findViewById(R.id.news_image);
         summaryView = view.findViewById(R.id.summary_content);
+        loader = view.findViewById(R.id.loader_detail);
+        view.findViewById(R.id.full_story_link).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onFullStoryClicked();
+            }
+        });
+
 
     }
 
     public void setUI(NewsEntity newsEntity) {
+        loader.setVisibility(View.GONE);
         titleView.setText(newsEntity.getTitle());
         summaryView.setText(newsEntity.getAbstract());
 
@@ -54,11 +65,15 @@ public class DetailNewsFragment extends Fragment {
                 .setImageRequest(ImageRequest.fromUri(Uri.parse(newsEntity.getImageUrl())))
                 .setOldController(imageView.getController()).build();
         imageView.setController(draweeController);
+        storyURL = newsEntity.getUrl();
     }
 
     private void onFullStoryClicked() {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setData(Uri.parse(storyURL));
-        startActivity(intent);
+        if (!TextUtils.isEmpty(storyURL)) {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            intent.setData(Uri.parse(storyURL));
+            startActivity(intent);
+        }
+
     }
 }
