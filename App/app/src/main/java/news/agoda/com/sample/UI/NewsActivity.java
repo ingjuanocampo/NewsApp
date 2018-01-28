@@ -1,7 +1,6 @@
 package news.agoda.com.sample.UI;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,7 +13,7 @@ import java.util.List;
 
 import news.agoda.com.sample.R;
 import news.agoda.com.sample.UI.adapters.NewsAdapter;
-import news.agoda.com.sample.model.NewsEntity;
+import news.agoda.com.sample.mvp.model.NewsEntity;
 import news.agoda.com.sample.mvp.NewsPresenter;
 import news.agoda.com.sample.mvp.NewsView;
 

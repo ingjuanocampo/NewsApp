@@ -1,9 +1,7 @@
-package news.agoda.com.sample.model;
+package news.agoda.com.sample.mvp.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
 
 /**
  * This represents a news item

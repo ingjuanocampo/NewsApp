@@ -1,4 +1,4 @@
-package news.agoda.com.sample.model;
+package news.agoda.com.sample.mvp.model;
 
 /**
  * This class represents a media item

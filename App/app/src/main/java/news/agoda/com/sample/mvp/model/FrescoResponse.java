@@ -1,4 +1,4 @@
-package news.agoda.com.sample.model;
+package news.agoda.com.sample.mvp.model;
 
 import com.google.gson.annotations.SerializedName;
 

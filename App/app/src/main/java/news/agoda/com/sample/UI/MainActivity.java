@@ -1,38 +1,5 @@
 package news.agoda.com.sample.UI;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.ListActivity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-import news.agoda.com.sample.Callback;
-import news.agoda.com.sample.DetailViewActivity;
-import news.agoda.com.sample.NewsListAdapter;
-import news.agoda.com.sample.R;
-import news.agoda.com.sample.model.NewsEntity;
-
 @Deprecated
 public class MainActivity {
         //extends ListActivity

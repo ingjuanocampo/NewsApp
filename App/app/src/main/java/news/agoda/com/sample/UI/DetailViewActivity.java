@@ -1,4 +1,4 @@
-package news.agoda.com.sample;
+package news.agoda.com.sample.UI;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.DraweeView;
 import com.facebook.imagepipeline.request.ImageRequest;
+
+import news.agoda.com.sample.R;
 
 /**
  * News detail view

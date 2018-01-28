@@ -1,6 +1,6 @@
 package news.agoda.com.sample.mvp;
 
-import news.agoda.com.sample.model.FrescoResponse;
+import news.agoda.com.sample.mvp.model.FrescoResponse;
 import news.agoda.com.sample.network.FrescoRetrofitApi;
 import rx.Observable;
 import rx.Observer;

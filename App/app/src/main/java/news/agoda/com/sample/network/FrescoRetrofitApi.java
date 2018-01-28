@@ -7,8 +7,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 
-import news.agoda.com.sample.model.FrescoResponse;
-import news.agoda.com.sample.model.MediaEntity;
+import news.agoda.com.sample.mvp.model.FrescoResponse;
+import news.agoda.com.sample.mvp.model.MediaEntity;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

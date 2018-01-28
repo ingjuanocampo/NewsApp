@@ -1,7 +1,6 @@
 package news.agoda.com.sample.network;
 
-import news.agoda.com.sample.model.FrescoResponse;
-import news.agoda.com.sample.model.NewsEntity;
+import news.agoda.com.sample.mvp.model.FrescoResponse;
 import retrofit2.Call;
 import retrofit2.http.GET;
 

@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import news.agoda.com.sample.R;
-import news.agoda.com.sample.model.MediaEntity;
-import news.agoda.com.sample.model.NewsEntity;
+import news.agoda.com.sample.mvp.model.MediaEntity;
+import news.agoda.com.sample.mvp.model.NewsEntity;
 import news.agoda.com.sample.network.FrescoRetrofitApi;
 
 /**
