@@ -31,11 +31,18 @@ public class FrescoRetrofitApi {
     }
 
     public FrescoRetrofitApi() {
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(getBaseUrl())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         frescoApi = retrofit.create(FrescoApi.class);
+    }
+
+    //For testing 
+    public FrescoRetrofitApi(FrescoApi frescoApi) {
+        this.frescoApi = frescoApi;
+
     }
 
     public String getBaseUrl() {
