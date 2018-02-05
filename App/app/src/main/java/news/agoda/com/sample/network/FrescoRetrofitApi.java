@@ -47,6 +47,7 @@ public class FrescoRetrofitApi {
             Response<FrescoResponse> response = frescoApi.getNews().execute();
             if (response.isSuccessful() && response.body() != null) {
                 subscriber.onNext(response.body());
+                subscriber.onCompleted();
             } else {
                 subscriber.onError(new Exception("There was a problem with the request"));
             }
@@ -62,7 +63,6 @@ public class FrescoRetrofitApi {
         Gson gson = new Gson();
         final Type tokenMediaEntry = new TypeToken<List<MediaEntity>>() {
         }.getType();
-
 
         return gson.fromJson(object2StringGson(object), tokenMediaEntry);
     }

@@ -10,5 +10,6 @@ import news.agoda.com.sample.mvp.model.NewsEntity;
 
 public interface NewsView {
     void setNews(List<NewsEntity> newsEntity);
+    void showLoading(boolean show);
     void setError();
 }

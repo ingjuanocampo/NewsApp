@@ -14,6 +14,7 @@ import java.util.List;
 
 import news.agoda.com.sample.R;
 import news.agoda.com.sample.UI.adapters.NewsAdapter;
+import news.agoda.com.sample.mvp.DataModel;
 import news.agoda.com.sample.mvp.NewsPresenter;
 import news.agoda.com.sample.mvp.NewsView;
 import news.agoda.com.sample.mvp.model.NewsEntity;
@@ -54,7 +55,7 @@ public class NewsListFragment extends Fragment implements NewsView  {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new NewsAdapter((NewsAdapter.NewsCardListener) getActivity());
         recyclerView.setAdapter(adapter);
-        presenter = new NewsPresenter(this);
+        presenter = new NewsPresenter(this, new DataModel());
     }
 
     @Override
@@ -71,7 +72,6 @@ public class NewsListFragment extends Fragment implements NewsView  {
 
     @Override
     public void setNews(List<NewsEntity> newsEntities) {
-        loader.setVisibility(View.GONE);
         recyclerView.setVisibility(View.VISIBLE);
         adapter.setNewsEntities(newsEntities);
         isTablet = getResources().getBoolean(R.bool.isTable);
@@ -81,8 +81,12 @@ public class NewsListFragment extends Fragment implements NewsView  {
     }
 
     @Override
+    public void showLoading(boolean show) {
+        loader.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
     public void setError() {
         // TODO create a default error screen
-        loader.setVisibility(View.GONE);
     }
 }
